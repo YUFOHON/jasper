@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author zr
@@ -45,6 +46,11 @@ public class demoController {
         }
     }
 
+    /**
+     * JasperReport的简单使用 (中文展示问题)
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping("/test2")
     public void test2(HttpServletResponse response) throws Exception{
         Resource resource = new ClassPathResource("templates/demo2.jasper");
@@ -57,6 +63,34 @@ public class demoController {
              * is:inputstream params：参数填充 DataSource：数据源填充
              */
             JasperPrint jasperPrint = JasperFillManager.fillReport(is, new HashMap<>(), new JREmptyDataSource());
+            // 写入pdf数据
+            JasperExportManager.exportReportToPdfStream(jasperPrint, os);
+        } finally {
+            os.flush();
+            os.close();
+        }
+
+    }
+
+    /**
+     * JasperReport携带参数
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/test3")
+    public void test3(HttpServletResponse response) throws Exception{
+        Resource resource = new ClassPathResource("templates/demo3.jasper");
+        FileInputStream is = new FileInputStream(resource.getFile());
+        ServletOutputStream os = response.getOutputStream();
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("year", "2023");
+        try {
+            /**
+             * 创建JasperPrint对象
+             * 数据填充
+             * is:inputstream params：参数填充 DataSource：数据源填充
+             */
+            JasperPrint jasperPrint = JasperFillManager.fillReport(is, parameters, new JREmptyDataSource());
             // 写入pdf数据
             JasperExportManager.exportReportToPdfStream(jasperPrint, os);
         } finally {
