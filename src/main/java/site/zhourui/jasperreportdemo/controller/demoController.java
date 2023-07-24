@@ -84,6 +84,7 @@ public class demoController {
         ServletOutputStream os = response.getOutputStream();
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("year", "2023");
+        parameters.put("name", "测试");
         try {
             /**
              * 创建JasperPrint对象
