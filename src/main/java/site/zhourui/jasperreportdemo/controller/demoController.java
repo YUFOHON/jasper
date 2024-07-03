@@ -108,6 +108,9 @@ public class demoController {
     private SqlSession sqlSession;
     @RequestMapping("/sql")
     public void generateReport(HttpServletResponse response) throws Exception {
+
+        JasperCompileManager.compileReportToFile("templates/jrxml/address.jrxml", "templates/adress.jasper");
+
         Resource resource = new ClassPathResource("templates/adress.jasper");
         try (FileInputStream is = new FileInputStream(resource.getFile());
              ServletOutputStream os = response.getOutputStream()) {
