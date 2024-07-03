@@ -56,7 +56,18 @@
             <version>4.2.2</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
 
+        <!-- MyBatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.0</version>
+        </dependency>
 <!-- 字体依赖,没有自己用library导入-->
         <dependency>
             <groupId>site.zhourui.report</groupId>
@@ -66,6 +77,7 @@
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -73,6 +85,7 @@
                 <version>2.4.1</version>
             </plugin>
         </plugins>
+
     </build>
 
 </project>
