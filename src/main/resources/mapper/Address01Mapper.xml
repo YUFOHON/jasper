@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.zhourui.jasperreportdemo.mapper.Address01Mapper">
+    <!--实体映射-->
+    <resultMap id="base_result_map" type="site.zhourui.jasperreportdemo.entity.po.Address01">
+        <!---->
+        <id column="id" property="id"/>
+        <!---->
+        <result column="firstname" property="firstname"/>
+        <!---->
+        <result column="lastname" property="lastname"/>
+        <!---->
+        <result column="street" property="street"/>
+        <!---->
+        <result column="city" property="city"/>
+    </resultMap>
+    <!--通用查询结果列-->
+    <sql id="base_column_list">
+	id,firstname,lastname,street,city
+    </sql>
+
+    <!--基础查询条件-->
+    <sql id="base_query_condition">
+		<if test="query.id!=null">
+			and id=#{query.id} 
+		</if>
+		<if test="query.firstname!=null and query.firstname!=''">
+			and firstname=#{query.firstname} 
+		</if>
+		<if test="query.lastname!=null and query.lastname!=''">
+			and lastname=#{query.lastname} 
+		</if>
+		<if test="query.street!=null and query.street!=''">
+			and street=#{query.street} 
+		</if>
+		<if test="query.city!=null and query.city!=''">
+			and city=#{query.city} 
+		</if>
+    </sql>
+    <!--扩展查询条件-->
+    <sql id="base_query_condition_extend">
+		<if test="query.firstnameFuzzy!=null and query.firstnameFuzzy!=''">
+			and firstname like concat('%',#{query.firstnameFuzzy},'%')
+		</if>
+		<if test="query.lastnameFuzzy!=null and query.lastnameFuzzy!=''">
+			and lastname like concat('%',#{query.lastnameFuzzy},'%')
+		</if>
+		<if test="query.streetFuzzy!=null and query.streetFuzzy!=''">
+			and street like concat('%',#{query.streetFuzzy},'%')
+		</if>
+		<if test="query.cityFuzzy!=null and query.cityFuzzy!=''">
+			and city like concat('%',#{query.cityFuzzy},'%')
+		</if>
+    </sql>
+    <!--通用查询条件-->
+    <sql id="query_condition">
+		<where>
+			<include refid="base_query_condition"/>
+			<include refid="base_query_condition_extend"/>
+		</where>
+    </sql>
+    <!--查询列表-->
+	<select id="selectList"  resultMap="base_result_map">
+		SELECT <include refid="base_column_list"/> FROM address_01 <include refid="query_condition"/>
+		<if test="query.orderBy!=null"> order by ${query.orderBy}</if>
+		<if test="query.simplePage!=null">limit #{query.simplePage.start},#{query.simplePage.end}</if>
+	</select>
+    <!--查询数量-->
+	<select id="selectCount"  resultType="java.lang.Integer">
+		SELECT count(1) FROM address_01 <include refid="query_condition"/>
+	</select>
+    <!--插入(匹配有值的字段)-->
+	<insert id="insert"  parameterType="site.zhourui.jasperreportdemo.entity.po.Address01">
+
+        insert into address_01
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bean.id!=null">
+                id,
+            </if>
+            <if test="bean.firstname!=null">
+                firstname,
+            </if>
+            <if test="bean.lastname!=null">
+                lastname,
+            </if>
+            <if test="bean.street!=null">
+                street,
+            </if>
+            <if test="bean.city!=null">
+                city,
+            </if>
+
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="bean.id!=null">
+                #{bean.id},
+            </if>
+            <if test="bean.firstname!=null">
+                #{bean.firstname},
+            </if>
+            <if test="bean.lastname!=null">
+                #{bean.lastname},
+            </if>
+            <if test="bean.street!=null">
+                #{bean.street},
+            </if>
+            <if test="bean.city!=null">
+                #{bean.city},
+            </if>
+        </trim>
+	</insert>
+    <!--插入或者更新(匹配有值的字段)-->
+	<insert id="insertOrUpdate"  parameterType="site.zhourui.jasperreportdemo.entity.po.Address01">
+        insert into address_01
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bean.id!=null">
+                id,
+            </if>
+            <if test="bean.firstname!=null">
+                firstname,
+            </if>
+            <if test="bean.lastname!=null">
+                lastname,
+            </if>
+            <if test="bean.street!=null">
+                street,
+            </if>
+            <if test="bean.city!=null">
+                city,
+            </if>
+
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="bean.id!=null">
+                #{bean.id},
+            </if>
+            <if test="bean.firstname!=null">
+                #{bean.firstname},
+            </if>
+            <if test="bean.lastname!=null">
+                #{bean.lastname},
+            </if>
+            <if test="bean.street!=null">
+                #{bean.street},
+            </if>
+            <if test="bean.city!=null">
+                #{bean.city},
+            </if>
+        </trim>
+        on DUPLICATE key update
+        <trim prefix="" suffix="" suffixOverrides=",">
+            <if test="bean.firstname!=null">
+                firstname =VALUES(firstname),
+            </if>
+            <if test="bean.lastname!=null">
+                lastname =VALUES(lastname),
+            </if>
+            <if test="bean.street!=null">
+                street =VALUES(street),
+            </if>
+            <if test="bean.city!=null">
+                city =VALUES(city),
+            </if>
+
+        </trim>
+	</insert>
+    <!--添加(批量插入)-->
+    <insert id="insertBatch" parameterType="site.zhourui.jasperreportdemo.entity.po.Address01">
+        insert into address_01(id,firstname,lastname,street,city)values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.firstname},#{item.lastname},#{item.street},#{item.city})
+        </foreach>
+    </insert>
+    <!--批量插入或更新 -->
+    <insert id="insertOrUpdateBatch" parameterType="site.zhourui.jasperreportdemo.entity.po.Address01">
+        insert into address_01(id,firstname,lastname,street,city)values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.firstname},#{item.lastname},#{item.street},#{item.city})
+        </foreach>
+        on DUPLICATE key update
+            id= VALUES(id),firstname= VALUES(firstname),lastname= VALUES(lastname),street= VALUES(street),city= VALUES(city)
+    </insert>
+    <!-- 根据"Id"查询-->
+    <select id="selectById" resultMap="base_result_map">
+        select <include refid="base_column_list"/>  from address_01 where id=#{id}
+    </select>
+    <!-- 根据"Id"更新-->
+    <update id="updateById" parameterType="site.zhourui.jasperreportdemo.entity.po.Address01">
+        update  address_01
+        <set>
+            <if test="bean.id!=null">
+                id=#{bean.id},
+            </if>
+            <if test="bean.firstname!=null">
+                firstname=#{bean.firstname},
+            </if>
+            <if test="bean.lastname!=null">
+                lastname=#{bean.lastname},
+            </if>
+            <if test="bean.street!=null">
+                street=#{bean.street},
+            </if>
+            <if test="bean.city!=null">
+                city=#{bean.city},
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <!-- 根据"Id"删除-->
+    <delete id="deleteById">
+        delete from address_01 where id=#{id}
+    </delete>
+
+</mapper>
