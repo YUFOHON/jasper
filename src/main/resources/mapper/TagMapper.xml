@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.zhourui.jasperreportdemo.mapper.TagMapper">
+
+    <resultMap id="HKIDRecordResultMap" type="site.zhourui.jasperreportdemo.entity.po.HKIDRecord">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="tag_no" property="tagNo" />
+        <result column="reference_no" property="referenceNo" />
+        <result column="issuing_time" property="issuingTime" />
+        <result column="call_time" property="callTime" />
+        <result column="counter_no" property="counterNo" />
+        <result column="status" property="status" />
+        <result column="issued_from" property="issuedFrom" />
+        <result column="called_round" property="calledRound" />
+        <result column="group_indicator" property="groupIndicator" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="HKIDRecordResultMap">
+        SELECT *
+        FROM hkid_records
+    </select>
+
+    <select id="selectById" resultMap="HKIDRecordResultMap">
+        SELECT *
+        FROM hkid_records
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateById">
+        UPDATE hkid_records
+        <set>
+            <if test="bean.type != null">type = #{bean.type},</if>
+            <if test="bean.tagNo != null">tag_no = #{bean.tagNo},</if>
+            <if test="bean.referenceNo != null">reference_no = #{bean.referenceNo},</if>
+            <if test="bean.issuingTime != null">issuing_time = #{bean.issuingTime},</if>
+            <if test="bean.callTime != null">call_time = #{bean.callTime},</if>
+            <if test="bean.counterNo != null">counter_no = #{bean.counterNo},</if>
+            <if test="bean.status != null">status = #{bean.status},</if>
+            <if test="bean.issuedFrom != null">issued_from = #{bean.issuedFrom},</if>
+            <if test="bean.calledRound != null">called_round = #{bean.calledRound},</if>
+            <if test="bean.groupIndicator != null">group_indicator = #{bean.groupIndicator}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM hkid_records
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

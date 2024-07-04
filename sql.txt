@@ -7,9 +7,38 @@ CREATE TABLE `address_01` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
 INSERT INTO `address_01` (`id`, `firstname`, `lastname`, `street`, `city`) VALUES
 (1, 'John', 'Doe', '123 Main St', 'Anytown'),
 (2, 'Jane', 'Smith', '456 Oak Rd', 'Somecity'),
 (3, 'Bob', 'Johnson', '789 Elm St', 'Othertown'),
 (4, 'Sarah', 'Williams', '321 Pine Ave', 'Newcity'),
 (5, 'Michael', 'Brown', '654 Maple Ln', 'Oldtown');
+
+CREATE DATABASE HKID_Management;
+
+USE HKID_Management;
+
+CREATE TABLE HKID_Records (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type ENUM('Express', 'Normal', 'Walk-in') NOT NULL,
+    tag_no VARCHAR(20) NOT NULL,
+    reference_no VARCHAR(50) NOT NULL,
+    issuing_time TIME NOT NULL,
+    call_time TIME,
+    counter_no VARCHAR(10),
+    status VARCHAR(20),
+    issued_from VARCHAR(50),
+    called_round INT,
+    group_indicator VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO HKID_Records (type, tag_no, reference_no, issuing_time, call_time, counter_no, status, issued_from, called_round, group_indicator)
+VALUES
+    ('Express', 'EXP001', 'REF-2023-001', '09:15:00', '09:20:00', 'C01', 'Completed', 'Central Office', 1, 'Group A'),
+    ('Normal', 'NOR002', 'REF-2023-002', '14:30:00', '14:45:00', 'C05', 'Issued', 'Kowloon Office', 2, 'Group B'),
+    ('Walk-in', 'WAL003', 'REF-2023-003', '16:00:00', '16:10:00', 'C08', 'Pending', 'New Territories Office', 1, 'Group C'),
+    ('Express', 'EXP004', 'REF-2023-004', '11:00:00', '11:05:00', 'C03', 'Completed', 'Central Office', 1, 'Group A'),
+    ('Normal', 'NOR005', 'REF-2023-005', '13:45:00', '14:00:00', 'C07', 'Issued', 'Kowloon Office', 3, 'Group B');

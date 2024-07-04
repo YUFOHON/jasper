@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import site.zhourui.jasperreportdemo.entity.po.Address01;
+import site.zhourui.jasperreportdemo.entity.po.HKIDRecord;
 import site.zhourui.jasperreportdemo.mapper.BaseMapper;
 
 import javax.servlet.ServletOutputStream;
@@ -21,7 +22,7 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * @author zr
+ * @author Bruce
  * @date 2023/7/20 14:52
  */
 @RestController
@@ -53,7 +54,29 @@ public class demoController {
             os.flush();
         }
     }
+    @RequestMapping("/hkid")
+    public void generateReport2(HttpServletResponse response) throws Exception {
+        // Fetch data from database
+        Resource resource = new ClassPathResource("templates/tag_daily_summary_report.jasper");
 
+        try (FileInputStream is = new FileInputStream(resource.getFile());
+             ServletOutputStream os = response.getOutputStream()) {
+
+            List<HKIDRecord> hkidRecordList = sqlSession.selectList("site.zhourui.jasperreportdemo.mapper.TagMapper.selectAll");
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(hkidRecordList);
+
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "inline; filename=report.pdf");
+
+            // Create JasperPrint object and fill report
+            JasperPrint jasperPrint = JasperFillManager.fillReport(is, null, dataSource);
+
+            // Export report to PDF
+            JasperExportManager.exportReportToPdfStream(jasperPrint, os);
+
+            os.flush();
+        }
+    }
 
 
 
