@@ -1,0 +1,179 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0  -->
+<jasperReport name="Tag Daily Summary Report" language="java" pageWidth="842" pageHeight="500" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fdacc018-772c-49cc-b50c-b47683e6e541">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="REPORT_ID" class="java.lang.String"/>
+	<parameter name="LOCATION_ID" class="java.lang.String"/>
+	<parameter name="PRINT_DATE" class="java.util.Date"/>
+	<parameter name="TRANSACTION_DATE" class="java.util.Date"/>
+	<field name="tagNo" class="java.lang.String"/>
+	<field name="referenceNo" class="java.lang.String"/>
+	<field name="issuingTime" class="java.sql.Time"/>
+	<field name="callTime" class="java.sql.Time"/>
+	<field name="counterNo" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="issuedFrom" class="java.lang.String"/>
+	<field name="calledRound" class="java.lang.Integer"/>
+	<field name="groupIndicator" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<title height="40" splitType="Stretch">
+		<element kind="textField" uuid="9723c43b-3de0-4ba1-b65a-7681ce1cd482" x="0" y="0" width="200" height="20">
+			<expression><![CDATA["REPORT ID         : " + $P{REPORT_ID}]]></expression>
+		</element>
+		<element kind="textField" uuid="1feadd62-201c-4c64-8744-f96b39064a4c" x="200" y="0" width="400" height="20" hTextAlign="Center">
+			<expression><![CDATA["I M M I G R A T I O N   D E P A R T M E N T"]]></expression>
+		</element>
+		<element kind="textField" uuid="5adc3134-a9f3-4ddf-974b-3284d31bae75" x="600" y="0" width="200" height="20" pattern="dd-MM-yyyy" hTextAlign="Right">
+			<expression><![CDATA["PRINT DATE : " + $P{PRINT_DATE}]]></expression>
+		</element>
+		<element kind="textField" uuid="f3370a25-a9d6-4e57-b588-0ca00c389a04" x="0" y="20" width="200" height="20">
+			<expression><![CDATA["LOCATION ID       : " + $P{LOCATION_ID}]]></expression>
+		</element>
+		<element kind="textField" uuid="9751a1c2-9cfb-4379-8a6d-3d8187612d68" x="200" y="20" width="400" height="20" hTextAlign="Center">
+			<expression><![CDATA["TAG DAILY SUMMARY REPORT"]]></expression>
+		</element>
+		<element kind="textField" uuid="d051bb8e-2669-4b87-a2b2-81c5275ebd0e" x="600" y="20" width="200" height="20" hTextAlign="Right">
+			<expression><![CDATA["PAGE       :          1"]]></expression>
+		</element>
+	</title>
+	<pageHeader height="20" splitType="Stretch">
+		<element kind="textField" uuid="2e9b22cb-8d20-476d-8b64-09734621e30b" x="200" y="0" width="400" height="20" pattern="dd-MM-yyyy" hTextAlign="Center">
+			<expression><![CDATA["TRANSACTION DATE : " + $P{TRANSACTION_DATE}]]></expression>
+		</element>
+	</pageHeader>
+	<detail>
+		<band height="120" splitType="Stretch">
+			<element kind="staticText" uuid="54496a41-b6f6-4fd8-8365-9741abe14faf" x="0" y="0" width="800" height="20">
+				<text><![CDATA[A) HKID Express]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5511" x="0" y="20" width="60" height="20">
+				<text><![CDATA[TAG NO.]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5512" x="60" y="20" width="100" height="20">
+				<text><![CDATA[REFERENCE NO.]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5513" x="160" y="20" width="80" height="20">
+				<text><![CDATA[ISSUING TIME]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5514" x="240" y="20" width="80" height="20">
+				<text><![CDATA[CALL TIME]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5515" x="320" y="20" width="80" height="20">
+				<text><![CDATA[COUNTER NO.]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5516" x="400" y="20" width="80" height="20">
+				<text><![CDATA[STATUS]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5517" x="480" y="20" width="100" height="20">
+				<text><![CDATA[ISSUED FROM]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5518" x="580" y="20" width="100" height="20">
+				<text><![CDATA[CALLED ROUND]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5519" x="680" y="20" width="140" height="20">
+				<text><![CDATA[GROUP INDICATOR]]></text>
+			</element>
+			<element kind="textField" uuid="18c143b7-708a-4735-907b-760ee52c5345" x="0" y="40" width="60" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{tagNo}]]></expression>
+			</element>
+			<element kind="textField" uuid="88efc1b8-710a-4b33-a58b-6098b3c3be2e" x="60" y="40" width="100" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{referenceNo}]]></expression>
+			</element>
+			<element kind="textField" uuid="1ea3da9b-e117-4ef5-95f1-8ab53f511eba" x="160" y="40" width="80" height="20" pattern="HH:mm:ss">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{issuingTime}]]></expression>
+			</element>
+			<element kind="textField" uuid="4d28ba84-2136-41cc-b719-96d178a648f4" x="240" y="40" width="80" height="20" pattern="HH:mm:ss">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{callTime}]]></expression>
+			</element>
+			<element kind="textField" uuid="941b6151-4948-4a5b-a200-d1835a4317c9" x="320" y="40" width="80" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{counterNo}]]></expression>
+			</element>
+			<element kind="textField" uuid="8c293a5c-0585-4eff-b835-695a2900327a" x="400" y="40" width="80" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{status}]]></expression>
+			</element>
+			<element kind="textField" uuid="73e22e10-eaaf-45f2-ad94-b131576ca57d" x="480" y="40" width="100" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{issuedFrom}]]></expression>
+			</element>
+			<element kind="textField" uuid="b0d283ee-2713-46a5-8491-b84a65135690" x="580" y="40" width="100" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{calledRound}]]></expression>
+			</element>
+			<element kind="textField" uuid="86f4e5a9-aaa2-40e4-97b6-ff391bb6742b" x="680" y="40" width="140" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Express")]]></printWhenExpression>
+				<expression><![CDATA[$F{groupIndicator}]]></expression>
+			</element>
+			<element kind="staticText" uuid="87dce7e2-6731-407f-8f3f-6f321fa7474b" x="0" y="60" width="800" height="20">
+				<text><![CDATA[B) HKID Normal]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5511" x="0" y="80" width="60" height="20">
+				<text><![CDATA[TAG NO.]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5512" x="60" y="80" width="100" height="20">
+				<text><![CDATA[REFERENCE NO.]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5513" x="160" y="80" width="80" height="20">
+				<text><![CDATA[ISSUING TIME]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5514" x="240" y="80" width="80" height="20">
+				<text><![CDATA[CALL TIME]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5515" x="320" y="80" width="80" height="20">
+				<text><![CDATA[COUNTER NO.]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5516" x="400" y="80" width="80" height="20">
+				<text><![CDATA[STATUS]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5517" x="480" y="80" width="100" height="20">
+				<text><![CDATA[ISSUED FROM]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5518" x="580" y="80" width="100" height="20">
+				<text><![CDATA[CALLED ROUND]]></text>
+			</element>
+			<element kind="staticText" uuid="e7723c39-9981-4a87-98dc-10ab2b6f5519" x="680" y="80" width="140" height="20">
+				<text><![CDATA[GROUP INDICATOR]]></text>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5520" x="0" y="100" width="60" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{tagNo}]]></expression>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5521" x="60" y="100" width="100" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{referenceNo}]]></expression>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5522" x="160" y="100" width="80" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{issuingTime}]]></expression>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5523" x="240" y="100" width="80" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{callTime}]]></expression>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5524" x="320" y="100" width="80" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{counterNo}]]></expression>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5525" x="400" y="100" width="80" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{status}]]></expression>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5526" x="480" y="100" width="100" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{issuedFrom}]]></expression>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5527" x="580" y="100" width="100" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{calledRound}]]></expression>
+			</element>
+			<element kind="textField" uuid="f1723c39-9981-4a87-98dc-10ab2b6f5528" x="680" y="100" width="140" height="20">
+				<printWhenExpression><![CDATA[$F{type}.equals("Normal")]]></printWhenExpression>
+				<expression><![CDATA[$F{groupIndicator}]]></expression>
+			</element>
+		</band>
+	</detail>
+</jasperReport>

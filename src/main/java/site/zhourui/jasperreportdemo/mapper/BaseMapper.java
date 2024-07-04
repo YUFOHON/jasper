@@ -6,32 +6,32 @@ import java.util.List;
 
 public interface BaseMapper <T,P>{
     /**
-     * insert:(输入)
+     * insert:
      */
     Integer insert(@Param("bean")T t);
 
     /**
-     * insertOrUpdate:(插入或者更新)
+     * insertOrUpdate:
      */
     Integer insertOrUpdate(@Param("bean")T t);
 
     /**
-     * insertBatch:(批量插入)
+     * insertBatch:
      */
     Integer insertBatch(@Param("list")List<T>list);
 
     /**
-     *insertOrUpdateBatch(批量插入或更新)
+     *insertOrUpdateBatch
      */
     Integer insertOrUpdateBatch(@Param("list")List<T>list);
 
     /**
-     *selectList(根据参数查询集合)
+     *selectList
      */
     List<T>selectList(@Param("query")P p);
 
     /**
-     *selectCount(根据参数查询数量)
+     *selectCount
      */
     Integer selectCount(@Param("query")P p);
 

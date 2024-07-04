@@ -77,6 +77,6 @@ public class Address01 implements Serializable {
 
 	@Override
 	public String toString(){
-        return "id:"+ (id == null?"空":id)+","+"firstname:"+ (firstname == null?"空":firstname)+","+"lastname:"+ (lastname == null?"空":lastname)+","+"street:"+ (street == null?"空":street)+","+"city:"+ (city == null?"空":city);
+        return "id:"+ (id == null?"空":id)+","+"firstname:"+ (firstname == null?" empty ":firstname)+","+"lastname:"+ (lastname == null?" empty ":lastname)+","+"street:"+ (street == null?" empty ":street)+","+"city:"+ (city == null?" empty ":city);
 	}
 }

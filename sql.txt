@@ -6,3 +6,10 @@ CREATE TABLE `address_01` (
   `city` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `address_01` (`id`, `firstname`, `lastname`, `street`, `city`) VALUES
+(1, 'John', 'Doe', '123 Main St', 'Anytown'),
+(2, 'Jane', 'Smith', '456 Oak Rd', 'Somecity'),
+(3, 'Bob', 'Johnson', '789 Elm St', 'Othertown'),
+(4, 'Sarah', 'Williams', '321 Pine Ave', 'Newcity'),
+(5, 'Michael', 'Brown', '654 Maple Ln', 'Oldtown');
