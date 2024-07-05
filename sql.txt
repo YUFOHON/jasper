@@ -15,11 +15,11 @@ INSERT INTO `address_01` (`id`, `firstname`, `lastname`, `street`, `city`) VALUE
 (4, 'Sarah', 'Williams', '321 Pine Ave', 'Newcity'),
 (5, 'Michael', 'Brown', '654 Maple Ln', 'Oldtown');
 
-CREATE DATABASE HKID_Management;
+CREATE DATABASE hkid_management;
 
-USE HKID_Management;
+USE hkid_management;
 
-CREATE TABLE HKID_Records (
+CREATE TABLE hkid_records (
     id INT AUTO_INCREMENT PRIMARY KEY,
     type ENUM('Express', 'Normal', 'Walk-in') NOT NULL,
     tag_no VARCHAR(20) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE HKID_Records (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO HKID_Records (type, tag_no, reference_no, issuing_time, call_time, counter_no, status, issued_from, called_round, group_indicator)
+INSERT INTO hkid_records (type, tag_no, reference_no, issuing_time, call_time, counter_no, status, issued_from, called_round, group_indicator)
 VALUES
     ('Express', 'EXP001', 'REF-2023-001', '09:15:00', '09:20:00', 'C01', 'Completed', 'Central Office', 1, 'Group A'),
     ('Normal', 'NOR002', 'REF-2023-002', '14:30:00', '14:45:00', 'C05', 'Issued', 'Kowloon Office', 2, 'Group B'),
